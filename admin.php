@@ -29,7 +29,10 @@ if (isset($_POST['login'])) {
         $row = $result->fetch_assoc();
         if (password_verify($password, $row['password'])) {
             $_SESSION['admin'] = true;
-            // No redirect, just set the session
+            $_SESSION['admin_id'] = $user['id'];
+            $_SESSION['admin_username'] = $user['username'];
+            //redirect to the same page after successful login
+            header("Location: admin.php");
         } else {
             $loginError = "Invalid username or password";
         }
